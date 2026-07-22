@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karnataka Education Hub | Secure Material Portal</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { primary: '#1E3A8A', secondary: '#3B82F6', darkBg: '#111827' }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300">
+
+    <!-- Clean Navigation Menu Bar -->
+<nav class="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md border-b dark:border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+            
+            <!-- Logo -->
+            <a href="index.html" class="font-black text-xl tracking-tight flex items-center gap-2">
+                <div class="h-9 w-9 bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center text-base">
+                <i class="fa-solid fa-folder-open"></i>
+                </div>
+                <span class="text-primary dark:text-secondary">K-Edu Hub</span>
+            </a>
+            
+            <!-- Desktop Navigation Links (Cleaned) -->
+            <div class="hidden md:flex space-x-6 items-center">
+                <button onclick="filterHomePageClass('all')" class="hover:text-secondary font-medium transition-colors">Home</button>
+                <a href="downloads.html" class="hover:text-secondary transition-colors flex items-center gap-1.5 font-medium">
+                    <i class="fa-solid fa-folder-open"></i> My Resources
+                </a>
+                
+                <!-- Login Banner Status Placement -->
+                <div id="nav-user-status" class="login-status-badge">
+                    <button onclick="openAuthModal()" class="bg-primary hover:bg-blue-800 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all shadow-sm">
+                        Student Sign In
+                    </button>
+                </div>
+
+                <!-- Dark Mode Toggle Button -->
+                <button id="theme-toggle" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:ring-2 hover:ring-gray-200 dark:hover:ring-gray-700 transition-all">
+                    <i class="fa-solid fa-moon dark:hidden text-gray-600"></i>
+                    <i class="fa-solid fa-sun hidden dark:block text-yellow-400"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+</nav>
+    <!-- Hero Content Header Panel -->
+    <header class="bg-gradient-to-br from-primary via-blue-900 to-indigo-950 text-white py-20 px-4 text-center shadow-inner relative overflow-hidden">
+        <div class="max-w-4xl mx-auto relative z-10">
+            <span class="bg-blue-500/20 text-blue-300 text-sm font-semibold px-4 py-1.5 rounded-full border border-blue-500/30 inline-block mb-4">Official 2026 Academic Study Platform</span>
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">Karnataka Education Hub</h1>
+            <p class="text-lg md:text-xl text-blue-200/90 mb-10 max-w-2xl mx-auto font-light">Access certified textbook notes, blueprints, and question papers. Registration is mandatory to execute downloads.</p>
+        </div>
+    </header>
+
+    <!-- Main Dynamic Resource Component Sections -->
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+            <div>
+                <h2 id="section-title" class="text-3xl font-extrabold text-gray-800 dark:text-gray-100">Featured Study Materials</h2>
+                <p class="text-gray-500 dark:text-gray-400 mt-1">Select a class course below or use search to filter certified resources.</p>
+            </div>
+
+            <!-- Course Filter Pill Buttons -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
+                <button onclick="filterHomePageClass('all')" class="course-pill-btn bg-secondary text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-sm" data-class="all">
+                    All Courses
+                </button>
+                <button onclick="filterHomePageClass('SSLC')" class="course-pill-btn bg-white dark:bg-gray-900 border dark:border-gray-800 text-gray-700 dark:text-gray-300 text-xs font-bold px-4 py-2 rounded-xl hover:border-secondary transition-all" data-class="SSLC">
+                    SSLC
+                </button>
+                <button onclick="filterHomePageClass('1st PUC')" class="course-pill-btn bg-white dark:bg-gray-900 border dark:border-gray-800 text-gray-700 dark:text-gray-300 text-xs font-bold px-4 py-2 rounded-xl hover:border-secondary transition-all" data-class="1st PUC">
+                    1st PUC
+                </button>
+                <button onclick="filterHomePageClass('2nd PUC')" class="course-pill-btn bg-white dark:bg-gray-900 border dark:border-gray-800 text-gray-700 dark:text-gray-300 text-xs font-bold px-4 py-2 rounded-xl hover:border-secondary transition-all" data-class="2nd PUC">
+                    2nd PUC
+                </button>
+                <button onclick="filterHomePageClass('KCET')" class="course-pill-btn bg-white dark:bg-gray-900 border dark:border-gray-800 text-gray-700 dark:text-gray-300 text-xs font-bold px-4 py-2 rounded-xl hover:border-secondary transition-all" data-class="KCET">
+                    KCET
+                </button>
+            </div>
+        </div>
+
+        <!-- Dynamic Resource Output Container -->
+        <div id="dynamic-resources-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <p class="text-gray-400 text-sm animate-pulse col-span-full text-center py-12">Contacting cloud document databases...</p>
+        </div>
+    </main>
+
+    <!-- Overlay Authentication Guard Modal System (Google Sign-In + Profile Form) -->
+    <div id="auth-modal" class="fixed inset-0 bg-black/70 backdrop-blur-md z-[100] hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-900 w-full max-w-md rounded-3xl p-6 shadow-2xl border dark:border-gray-800 transform scale-100 transition-all">
+            
+            <!-- Modal Header -->
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-black text-gray-900 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-secondary"></i> Student Access
+                </h3>
+                <button onclick="closeAuthModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- STEP 1: Google Auth Button -->
+            <div id="google-signin-section" class="space-y-4">
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                    Sign in with your official Google account to access study materials.
+                </p>
+                <button type="button" id="google-login-btn" class="w-full flex items-center justify-center gap-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-white font-bold py-3.5 rounded-xl transition-all shadow-sm">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-5 h-5" alt="Google Logo">
+                    Continue with Google
+                </button>
+            </div>
+
+            <!-- STEP 2: Profile Details Form -->
+            <div id="profile-registration-section" class="space-y-4 hidden">
+                <p class="text-sm text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1.5">
+                    <i class="fa-solid fa-circle-check"></i> Google authenticated! Complete your student profile.
+                </p>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">Full Student Name</label>
+                    <input type="text" id="profile-name" class="w-full px-4 py-2.5 border rounded-xl dark:bg-gray-800 dark:border-gray-700 outline-none focus:ring-2 focus:ring-secondary text-gray-900 dark:text-white bg-transparent" placeholder="Enter full legal name">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">Mobile Contact Number</label>
+                    <div class="flex">
+                        <span class="inline-flex items-center px-3.5 rounded-l-xl border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400">+91</span>
+                        <input type="tel" id="profile-phone" pattern="[6-9][0-9]{9}" maxlength="10" required class="w-full px-4 py-2.5 border rounded-r-xl dark:bg-gray-800 dark:border-gray-700 outline-none focus:ring-2 focus:ring-secondary text-gray-900 dark:text-white bg-transparent" placeholder="10-digit phone number">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">Academic Class / Course</label>
+                    <select id="profile-class" class="w-full px-4 py-2.5 border rounded-xl dark:bg-gray-800 dark:border-gray-700 outline-none focus:ring-2 focus:ring-secondary text-gray-900 dark:text-white bg-transparent">
+                        <option value="" class="dark:bg-gray-900">Select Class</option>
+                        <option value="SSLC" class="dark:bg-gray-900">SSLC</option>
+                        <option value="1st PUC" class="dark:bg-gray-900">1st PUC</option>
+                        <option value="2nd PUC" class="dark:bg-gray-900">2nd PUC</option>
+                        <option value="KCET" class="dark:bg-gray-900">KCET</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">Date of Birth</label>
+                    <input type="date" id="profile-dob" class="w-full px-4 py-2.5 border rounded-xl dark:bg-gray-800 dark:border-gray-700 outline-none focus:ring-2 focus:ring-secondary text-gray-900 dark:text-white bg-transparent">
+                </div>
+                <button type="button" id="save-profile-btn" class="w-full bg-primary hover:bg-blue-800 text-white font-bold py-3.5 rounded-xl transition-all shadow-md active:scale-[0.98]">
+                    Complete Registration & Unlock Access
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Active App Logic Script Binding -->
+    <script type="module" src="js/app.js"></script>
+    
+    <!-- Fallback Global Modal Display Functions -->
+    <script>
+        function openAuthModal() {
+            const modal = document.getElementById('auth-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+        function closeAuthModal() {
+            const modal = document.getElementById('auth-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

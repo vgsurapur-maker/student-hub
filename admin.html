@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Edu Hub | Admin Control Management Panel</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: { colors: { primary: '#1E3A8A', secondary: '#3B82F6' } }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300 min-h-screen flex flex-col justify-between">
+
+    <!-- Admin Navigation -->
+    <nav class="bg-white dark:bg-gray-900 shadow-md border-b dark:border-gray-800 px-6 py-4 flex justify-between items-center">
+        <a href="index.html" class="font-black text-xl tracking-tight flex items-center gap-2">
+            <div class="h-9 w-9 bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center text-base">
+                <i class="fa-solid fa-folder-open"></i>
+            </div>
+            <span class="text-primary dark:text-secondary">K-Edu Hub</span>
+        </a>
+        <a href="index.html" class="text-sm font-medium hover:underline text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+            <i class="fa-solid fa-arrow-left"></i> View Live Site
+        </a>
+    </nav>
+
+    <!-- Main Dynamic Content Wrapper -->
+    <main class="flex-grow flex items-center justify-center p-6 my-auto">
+        
+        <!-- SECTION A: Admin Login Guard Panel -->
+        <div id="admin-login-card" class="bg-white dark:bg-gray-900 w-full max-w-md rounded-3xl p-8 shadow-xl border dark:border-gray-800">
+            <div class="text-center mb-6">
+                <div class="h-12 w-12 bg-blue-100 dark:bg-blue-950 text-primary dark:text-secondary rounded-full flex items-center justify-center mx-auto mb-3 text-xl">
+                    <i class="fa-solid fa-lock-open"></i>
+                </div>
+                <h2 class="text-2xl font-black">Authorized Portal</h2>
+                <p class="text-sm text-gray-400 mt-1">Provide credential variables to manage content repositories.</p>
+            </div>
+
+            <form id="admin-login-form" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Admin Email Address</label>
+                    <input type="email" id="admin-email" required class="w-full px-4 py-2.5 border rounded-xl dark:bg-gray-800 dark:border-gray-700 outline-none focus:ring-2 focus:ring-secondary" placeholder="admin@karnatakajahub.com">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Security Password</label>
+                    <input type="password" id="admin-password" required class="w-full px-4 py-2.5 border rounded-xl dark:bg-gray-800 dark:border-gray-700 outline-none focus:ring-2 focus:ring-secondary" placeholder="••••••••">
+                </div>
+                <button type="submit" class="w-full bg-primary hover:bg-blue-800 text-white font-bold py-3 rounded-xl transition-all shadow-md">
+                    Execute Secure Login
+                </button>
+            </form>
+        </div>
+
+        <!-- SECTION B: Core Content Dashboard (Hidden by default) -->
+        <div id="admin-dashboard-panel" class="w-full max-w-2xl space-y-6 hidden">
+            
+            <!-- Upload Card -->
+            <div class="bg-white dark:bg-gray-900 rounded-3xl p-8 shadow-xl border dark:border-gray-800">
+                <div class="flex justify-between items-center border-b dark:border-gray-800 pb-4 mb-6">
+                    <div>
+                        <h2 class="text-2xl font-black flex items-center gap-2">
+                            <i class="fa-solid fa-cloud-arrow-up text-secondary"></i> Resource Publisher
+                        </h2>
+                        <p class="text-sm text-gray-400 mt-0.5">Upload new verified syllabus materials directly into production nodes.</p>
+                    </div>
+                    <button id="admin-logout-btn" class="bg-red-50 hover:bg-red-100 dark:bg-red-950/40 text-red-600 px-4 py-2 rounded-xl text-xs font-bold transition-colors">
+                        <i class="fa-solid fa-power-off"></i> Exit Session
+                    </button>
+                </div>
+
+                <form id="resource-upload-form" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Academic Stream/Class</label>
+                            <select id="res-class" required class="w-full px-4 py-2.5 border rounded-xl dark:bg-gray-800 dark:border-gray-700 outline-none focus:ring-2 focus:ring-secondary">
+                                <option value="SSLC">SSLC (10th)</option>
+                                <option value="1st PUC">1st PUC</option>
+                                <option value="2nd PUC">2nd PUC</option>
+                                <option value="KCET">KCET Resources</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Subject Category</label>
+                            <input type="text" id="res-subject" required class="w-full px-4 py-2.5 border rounded-xl dark:bg-gray-800 dark:border-gray-700 outline-none focus:ring-2 focus:ring-secondary" placeholder="e.g., Mathematics, Physics">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Resource Title</label>
+                        <input type="text" id="res-title" required class="w-full px-4 py-2.5 border rounded-xl dark:bg-gray-800 dark:border-gray-700 outline-none focus:ring-2 focus:ring-secondary" placeholder="e.g., 2026 Mathematics Model Blueprint Paper 1">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Brief Description</label>
+                        <textarea id="res-description" rows="3" required class="w-full px-4 py-2.5 border rounded-xl dark:bg-gray-800 dark:border-gray-700 outline-none focus:ring-2 focus:ring-secondary" placeholder="Provide details regarding chapter coverage or specific target notes..."></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">Target PDF Document Asset</label>
+                        <div class="border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-2xl p-4 text-center hover:border-secondary transition-colors relative">
+                            <input type="file" id="res-file" accept=".pdf" required class="absolute inset-0 opacity-0 cursor-pointer">
+                            <div class="space-y-1 text-gray-400">
+                                <i class="fa-solid fa-file-pdf text-3xl text-gray-300 dark:text-gray-600"></i>
+                                <p class="text-sm"><span class="text-secondary font-semibold">Click to browse file arrays</span> or drag object here</p>
+                                <p class="text-xs">Strict validation engine parameters: Only raw PDF types accepted.</p>
+                            </div>
+                        </div>
+                        <p id="file-name-display" class="mt-2 text-xs text-emerald-500 font-semibold hidden"></p>
+                    </div>
+
+                    <!-- Processing Progress Bar Component -->
+                    <div id="upload-progress-container" class="space-y-1.5 hidden">
+                        <div class="flex justify-between text-xs font-bold text-gray-400">
+                            <span>Uploading File System Matrix...</span>
+                            <span id="upload-percentage">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 dark:bg-gray-700 h-2 rounded-full overflow-hidden">
+                            <div id="upload-progress-bar" class="bg-secondary h-full w-0 transition-all duration-150"></div>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submit-upload-btn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-circle-check"></i> Commit Resource to Database
+                    </button>
+                </form>
+            </div>
+
+            <!-- Manage & Delete Uploaded Materials Section -->
+            <div class="bg-white dark:bg-gray-900 rounded-3xl p-8 shadow-xl border dark:border-gray-800">
+                <h3 class="text-xl font-bold flex items-center gap-2 mb-4">
+                    <i class="fa-solid fa-list-check text-secondary"></i> Manage Uploaded Materials
+                </h3>
+                <div id="admin-materials-list" class="space-y-3">
+                    <p class="text-gray-400 text-xs">Loading database materials...</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer System Context -->
+    <footer class="text-center py-4 text-xs text-gray-400 border-t dark:border-gray-800 bg-white dark:bg-gray-900">
+        System Operational Token: Secure Cloud Portal Admin Layer V10.
+    </footer>
+
+    <!-- Script Routing Entry Execution Points -->
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>
