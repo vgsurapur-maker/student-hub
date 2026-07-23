@@ -7,14 +7,13 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDWNIVlRSRdAaB5diUKO0qdxwfT67WPBCQ",
+  apiKey: "AIzaSyDWNIVlRSRdAaB5diUKOOqdxwfT67WPBCQ",
   authDomain: "student-hub-12.firebaseapp.com",
   projectId: "student-hub-12",
   storageBucket: "student-hub-12.firebasestorage.app",
   messagingSenderId: "45803687369",
   appId: "1:45803687369:web:524a611980cd9fc1272c18",
-  // If Firebase gave you a measurementId on your screen (starts with "G-"), paste it below:
-  // measurementId: "G-XXXXXXXXXX"
+  measurementId: "G-5PQXKE99L7"
 };
 
 // Initialize Firebase App
