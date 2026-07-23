@@ -269,3 +269,119 @@ if (themeToggleBtn) {
 document.addEventListener('DOMContentLoaded', () => {
     loadHomePageMaterials('all');
 });
+// Paste inside js/app.js
+
+let currentCourse = 'SSLC';
+let currentSubject = 'All';
+
+// Retrieve materials array from localStorage or Firebase
+let uploadedMaterials = JSON.parse(localStorage.getItem('materials')) || [];
+
+function selectCourse(course) {
+    currentCourse = course;
+    currentSubject = 'All';
+
+    const courseHeading = document.getElementById('course-heading');
+    if (courseHeading) {
+        courseHeading.innerText = `${course} Study Materials`;
+    }
+
+    renderSubjectFilters();
+    renderMaterials();
+}
+
+function renderSubjectFilters() {
+    const subjectContainer = document.getElementById('subject-container');
+    const subjectButtonsDiv = document.getElementById('subject-buttons');
+
+    if (!subjectContainer || !subjectButtonsDiv) return;
+
+    // Filter items belonging to the selected course
+    const courseMaterials = currentCourse === 'All' 
+        ? uploadedMaterials 
+        : uploadedMaterials.filter(item => item.course === currentCourse);
+
+    // Extract ONLY unique subjects that exist in uploaded materials
+    const availableSubjects = [...new Set(courseMaterials.map(item => item.subject))];
+
+    // Hide filter bar if no subjects exist for this course yet
+    if (availableSubjects.length === 0) {
+        subjectContainer.classList.add('hidden');
+        return;
+    }
+
+    subjectContainer.classList.remove('hidden');
+
+    let buttonsHTML = `
+        <button onclick="selectSubject('All')" 
+            class="px-3 py-1 text-xs font-semibold rounded-lg transition ${
+                currentSubject === 'All' 
+                ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900' 
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300'
+            }">
+            All Subjects
+        </button>
+    `;
+
+    // Only create buttons for subjects present in uploaded notes (e.g., Mathematics, Kannada, Physics)
+    availableSubjects.forEach(subject => {
+        const isActive = currentSubject === subject;
+        buttonsHTML += `
+            <button onclick="selectSubject('${subject}')" 
+                class="px-3 py-1 text-xs font-semibold rounded-lg transition ${
+                    isActive 
+                    ? 'bg-blue-600 text-white' 
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300'
+                }">
+                ${subject}
+            </button>
+        `;
+    });
+
+    subjectButtonsDiv.innerHTML = buttonsHTML;
+}
+
+function selectSubject(subject) {
+    currentSubject = subject;
+    renderSubjectFilters();
+    renderMaterials();
+}
+
+function renderMaterials() {
+    const materialsList = document.getElementById('materials-list');
+    if (!materialsList) return;
+
+    let filtered = uploadedMaterials.filter(item => {
+        const matchesCourse = currentCourse === 'All' || item.course === currentCourse;
+        const matchesSubject = currentSubject === 'All' || item.subject === currentSubject;
+        return matchesCourse && matchesSubject;
+    });
+
+    if (filtered.length === 0) {
+        materialsList.innerHTML = `
+            <div class="flex flex-col items-center justify-center py-16 text-center">
+                <i class="fa-solid fa-folder-open text-5xl text-gray-300 mb-4"></i>
+                <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300">No Materials Available</h3>
+                <p class="text-sm text-gray-400 mt-1">No uploaded resources match "${currentCourse}" ${currentSubject !== 'All' ? '- ' + currentSubject : ''}.</p>
+            </div>
+        `;
+        return;
+    }
+
+    materialsList.innerHTML = filtered.map(item => `
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 shadow-sm mb-3 flex justify-between items-center">
+            <div>
+                <span class="text-xs font-bold px-2 py-0.5 bg-blue-50 text-blue-600 rounded dark:bg-blue-950 dark:text-blue-300">${item.subject}</span>
+                <h4 class="font-bold text-gray-900 dark:text-white mt-1">${item.title}</h4>
+            </div>
+            <a href="${item.fileUrl}" download class="px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition">
+                Download PDF
+            </a>
+        </div>
+    `).join('');
+}
+
+// Automatically load SSLC course view when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    selectCourse('SSLC');
+});

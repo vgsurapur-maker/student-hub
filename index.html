@@ -27,42 +27,43 @@
 <body class="bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300">
 
     <!-- Clean Navigation Menu Bar -->
-<nav class="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md border-b dark:border-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16 items-center">
-            
-            <!-- Logo -->
-            <a href="index.html" class="font-black text-xl tracking-tight flex items-center gap-2">
-                <div class="h-9 w-9 bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center text-base">
-                <i class="fa-solid fa-folder-open"></i>
-                </div>
-                <span class="text-primary dark:text-secondary">K-Edu Hub</span>
-            </a>
-            
-            <!-- Desktop Navigation Links (Cleaned) -->
-            <div class="hidden md:flex space-x-6 items-center">
-                <button onclick="filterHomePageClass('all')" class="hover:text-secondary font-medium transition-colors">Home</button>
-                <a href="downloads.html" class="hover:text-secondary transition-colors flex items-center gap-1.5 font-medium">
-                    <i class="fa-solid fa-folder-open"></i> My Resources
+    <nav class="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md border-b dark:border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                
+                <!-- Logo -->
+                <a href="index.html" class="font-black text-xl tracking-tight flex items-center gap-2">
+                    <div class="h-9 w-9 bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center text-base">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </div>
+                    <span class="text-primary dark:text-secondary">K-Edu Hub</span>
                 </a>
                 
-                <!-- Login Banner Status Placement -->
-                <div id="nav-user-status" class="login-status-badge">
-                    <button onclick="openAuthModal()" class="bg-primary hover:bg-blue-800 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all shadow-sm">
-                        Student Sign In
+                <!-- Desktop Navigation Links -->
+                <div class="hidden md:flex space-x-6 items-center">
+                    <button onclick="filterHomePageClass('all')" class="hover:text-secondary font-medium transition-colors">Home</button>
+                    <a href="downloads.html" class="hover:text-secondary transition-colors flex items-center gap-1.5 font-medium">
+                        <i class="fa-solid fa-folder-open"></i> My Resources
+                    </a>
+                    
+                    <!-- Login Banner Status Placement -->
+                    <div id="nav-user-status" class="login-status-badge">
+                        <button onclick="openAuthModal()" class="bg-primary hover:bg-blue-800 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all shadow-sm">
+                            Student Sign In
+                        </button>
+                    </div>
+
+                    <!-- Dark Mode Toggle Button -->
+                    <button id="theme-toggle" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:ring-2 hover:ring-gray-200 dark:hover:ring-gray-700 transition-all">
+                        <i class="fa-solid fa-moon dark:hidden text-gray-600"></i>
+                        <i class="fa-solid fa-sun hidden dark:block text-yellow-400"></i>
                     </button>
                 </div>
 
-                <!-- Dark Mode Toggle Button -->
-                <button id="theme-toggle" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:ring-2 hover:ring-gray-200 dark:hover:ring-gray-700 transition-all">
-                    <i class="fa-solid fa-moon dark:hidden text-gray-600"></i>
-                    <i class="fa-solid fa-sun hidden dark:block text-yellow-400"></i>
-                </button>
             </div>
-
         </div>
-    </div>
-</nav>
+    </nav>
+
     <!-- Hero Content Header Panel -->
     <header class="bg-gradient-to-br from-primary via-blue-900 to-indigo-950 text-white py-20 px-4 text-center shadow-inner relative overflow-hidden">
         <div class="max-w-4xl mx-auto relative z-10">
@@ -74,7 +75,7 @@
 
     <!-- Main Dynamic Resource Component Sections -->
     <main class="max-w-7xl mx-auto px-4 py-12">
-        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
             <div>
                 <h2 id="section-title" class="text-3xl font-extrabold text-gray-800 dark:text-gray-100">Featured Study Materials</h2>
                 <p class="text-gray-500 dark:text-gray-400 mt-1">Select a class course below or use search to filter certified resources.</p>
@@ -100,13 +101,21 @@
             </div>
         </div>
 
+        <!-- NEW: DYNAMIC SUBJECT FILTER SECTION -->
+        <!-- Shows only when subjects (e.g. Mathematics, English, Kannada, Physics) exist for the selected course -->
+        <div id="subject-filter-container" class="mb-8 hidden">
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-200 dark:border-gray-800 pt-2" id="subject-buttons-list">
+                <!-- js/app.js will dynamically insert subject buttons here -->
+            </div>
+        </div>
+
         <!-- Dynamic Resource Output Container -->
         <div id="dynamic-resources-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <p class="text-gray-400 text-sm animate-pulse col-span-full text-center py-12">Contacting cloud document databases...</p>
         </div>
     </main>
 
-    <!-- Overlay Authentication Guard Modal System (Google Sign-In + Profile Form) -->
+    <!-- Overlay Authentication Guard Modal System -->
     <div id="auth-modal" class="fixed inset-0 bg-black/70 backdrop-blur-md z-[100] hidden flex items-center justify-center p-4">
         <div class="bg-white dark:bg-gray-900 w-full max-w-md rounded-3xl p-6 shadow-2xl border dark:border-gray-800 transform scale-100 transition-all">
             
