@@ -5,58 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karnataka Education Hub | Secure Material Portal</title>
     <link rel="icon" type="image/png" href="images/logo.png">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2946284938161024"
-        crossorigin="anonymous">
-    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2946284938161024" crossorigin="anonymous"></script>
+    
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
-                    colors: { primary: '#1E3A8A', secondary: '#3B82F6', darkBg: '#111827' }
+                    colors: { 
+                        primary: '#1E3A8A', 
+                        secondary: '#3B82F6', 
+                        darkBg: '#0B0F19' 
+                    }
                 }
             }
         }
     </script>
+
+    <!-- Google Font: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300">
 
-    <!-- Clean Navigation Menu Bar -->
-    <nav class="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md border-b dark:border-gray-800">
+    <!-- Premium Aesthetic Custom Styles -->
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Ambient Glow Blob Elements */
+        .glow-blob {
+            position: absolute;
+            filter: blur(100px);
+            opacity: 0.35;
+            pointer-events: none;
+            border-radius: 50%;
+        }
+
+        /* Modern Glassmorphism Styling */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .dark .glass-nav {
+            background: rgba(11, 15, 25, 0.85);
+        }
+
+        /* Vibrant Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 50%, #EC4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-[#0B0F19] dark:text-slate-100 transition-colors duration-300 min-h-screen selection:bg-blue-500 selection:text-white">
+
+    <!-- Glassmorphic Sticky Navigation -->
+    <nav class="sticky top-0 z-50 glass-nav border-b border-slate-200/80 dark:border-slate-800/80 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 
                 <!-- Logo -->
-                <a href="index.html" class="font-black text-xl tracking-tight flex items-center gap-2">
-                    <div class="h-9 w-9 bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center text-base">
-                        <i class="fa-solid fa-folder-open"></i>
+                <a href="index.html" class="font-extrabold text-xl tracking-tight flex items-center gap-3 group">
+                    <div class="h-10 w-10 bg-gradient-to-tr from-blue-600 to-indigo-600 text-white rounded-2xl flex items-center justify-center text-lg shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-graduation-cap"></i>
                     </div>
-                    <span class="text-primary dark:text-secondary">K-Edu Hub</span>
+                    <span class="text-slate-900 dark:text-white font-black tracking-tight text-lg">K-Edu<span class="text-blue-600 dark:text-blue-400">Hub</span></span>
                 </a>
                 
-                <!-- Desktop Navigation Links -->
+                <!-- Desktop Navigation Items -->
                 <div class="hidden md:flex space-x-6 items-center">
-                    <button onclick="filterHomePageClass('all')" class="hover:text-secondary font-medium transition-colors">Home</button>
-                    <a href="downloads.html" class="hover:text-secondary transition-colors flex items-center gap-1.5 font-medium">
-                        <i class="fa-solid fa-folder-open"></i> My Resources
+                    <button onclick="filterHomePageClass('all')" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 font-semibold text-xs tracking-wide transition-colors">Home</button>
+                    <a href="downloads.html" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 font-semibold text-xs tracking-wide transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-folder-closed text-blue-500"></i> My Resources
                     </a>
                     
-                    <!-- Login Banner Status Placement -->
+                    <!-- Login Banner / User Profile State -->
                     <div id="nav-user-status" class="login-status-badge">
-                        <button onclick="openAuthModal()" class="bg-primary hover:bg-blue-800 text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all shadow-sm">
-                            Student Sign In
+                        <button onclick="openAuthModal()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all shadow-md shadow-blue-500/20 hover:scale-[1.02] active:scale-[0.98]">
+                            <i class="fa-solid fa-user-circle mr-1.5"></i> Student Sign In
                         </button>
                     </div>
 
-                    <!-- Dark Mode Toggle Button -->
-                    <button id="theme-toggle" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:ring-2 hover:ring-gray-200 dark:hover:ring-gray-700 transition-all">
-                        <i class="fa-solid fa-moon dark:hidden text-gray-600"></i>
-                        <i class="fa-solid fa-sun hidden dark:block text-yellow-400"></i>
+                    <!-- Dark / Light Theme Toggle -->
+                    <button id="theme-toggle" class="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-all border border-slate-200/50 dark:border-slate-700/50">
+                        <i class="fa-solid fa-moon dark:hidden"></i>
+                        <i class="fa-solid fa-sun hidden dark:block text-amber-400"></i>
                     </button>
                 </div>
 
@@ -64,121 +116,144 @@
         </div>
     </nav>
 
-    <!-- Hero Content Header Panel -->
-    <header class="bg-gradient-to-br from-primary via-blue-900 to-indigo-950 text-white py-20 px-4 text-center shadow-inner relative overflow-hidden">
-        <div class="max-w-4xl mx-auto relative z-10">
-            <span class="bg-blue-500/20 text-blue-300 text-sm font-semibold px-4 py-1.5 rounded-full border border-blue-500/30 inline-block mb-4">Official 2026 Academic Study Platform</span>
-            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">Karnataka Education Hub</h1>
-            <p class="text-lg md:text-xl text-blue-200/90 mb-10 max-w-2xl mx-auto font-light">Access certified textbook notes, blueprints, and question papers. Registration is mandatory to execute downloads.</p>
+    <!-- Aesthetic Hero Header -->
+    <header class="relative py-16 px-4 text-center overflow-hidden border-b border-slate-200/60 dark:border-slate-800/60">
+        <!-- Ambient Background Lights -->
+        <div class="glow-blob w-[500px] h-[500px] bg-blue-500/20 -top-40 left-1/2 -translate-x-1/2"></div>
+        <div class="glow-blob w-[300px] h-[300px] bg-purple-500/20 top-20 right-10"></div>
+
+        <div class="max-w-4xl mx-auto relative z-10 space-y-4">
+            <span class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 border border-blue-200/60 dark:border-blue-800/60 rounded-full inline-flex items-center gap-2 shadow-sm">
+                <i class="fa-solid fa-sparkles text-amber-400"></i> Official 2026 Academic Study Platform
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+                Karnataka <span class="gradient-text">Education Hub</span>
+            </h1>
+            <p class="text-base md:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-medium leading-relaxed">
+                Access certified textbook notes, blueprints, and question papers. Sign in to execute high-speed material downloads.
+            </p>
         </div>
     </header>
 
-    <!-- Main Dynamic Resource Component Sections -->
-    <main class="max-w-7xl mx-auto px-4 py-12">
-        <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+    <!-- Main Dynamic Resource Hub -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <!-- Section Header & Course Selector Bar -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-8 gap-6">
             <div>
-                <h2 id="section-title" class="text-3xl font-extrabold text-gray-800 dark:text-gray-100">Featured Study Materials</h2>
-                <p class="text-gray-500 dark:text-gray-400 mt-1">Select a class course below or use search to filter certified resources.</p>
+                <h2 id="section-title" class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                    Featured Study Materials
+                </h2>
+                <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-1">
+                    Select a course filter below to discover syllabus-compliant assets.
+                </p>
             </div>
 
-            <!-- Course Filter Pill Buttons -->
-            <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
-                <button onclick="filterHomePageClass('All')" class="course-pill-btn bg-secondary text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-sm" data-class="all">
+            <!-- Course Pill Buttons -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
+                <button onclick="filterHomePageClass('All')" class="course-pill-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-300 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-blue-500 shadow-sm" data-class="all">
                     All Courses
                 </button>
-                <button onclick="filterHomePageClass('SSLC')" class="course-pill-btn bg-white dark:bg-gray-900 border dark:border-gray-800 text-gray-700 dark:text-gray-300 text-xs font-bold px-4 py-2 rounded-xl hover:border-secondary transition-all" data-class="SSLC">
+                <button onclick="filterHomePageClass('SSLC')" class="course-pill-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-300 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-blue-500 shadow-sm" data-class="SSLC">
                     SSLC
                 </button>
-                <button onclick="filterHomePageClass('1st PUC')" class="course-pill-btn bg-white dark:bg-gray-900 border dark:border-gray-800 text-gray-700 dark:text-gray-300 text-xs font-bold px-4 py-2 rounded-xl hover:border-secondary transition-all" data-class="1st PUC">
+                <button onclick="filterHomePageClass('1st PUC')" class="course-pill-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-300 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-blue-500 shadow-sm" data-class="1st PUC">
                     1st PUC
                 </button>
-                <button onclick="filterHomePageClass('2nd PUC')" class="course-pill-btn bg-white dark:bg-gray-900 border dark:border-gray-800 text-gray-700 dark:text-gray-300 text-xs font-bold px-4 py-2 rounded-xl hover:border-secondary transition-all" data-class="2nd PUC">
+                <button onclick="filterHomePageClass('2nd PUC')" class="course-pill-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-300 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-blue-500 shadow-sm" data-class="2nd PUC">
                     2nd PUC
                 </button>
-                <button onclick="filterHomePageClass('KCET')" class="course-pill-btn bg-white dark:bg-gray-900 border dark:border-gray-800 text-gray-700 dark:text-gray-300 text-xs font-bold px-4 py-2 rounded-xl hover:border-secondary transition-all" data-class="KCET">
+                <button onclick="filterHomePageClass('KCET')" class="course-pill-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-300 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-blue-500 shadow-sm" data-class="KCET">
                     KCET
                 </button>
-                <button onclick="filterHomePageClass('NEET')" class="course-pill-btn bg-white dark:bg-gray-900 border dark:border-gray-800 text-gray-700 dark:text-gray-300 text-xs font-bold px-4 py-2 rounded-xl hover:border-secondary transition-all" data-class="NEET">
+                <button onclick="filterHomePageClass('NEET')" class="course-pill-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-300 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-blue-500 shadow-sm" data-class="NEET">
                     NEET
                 </button>
-                <button onclick="filterHomePageClass('JEE')" class="course-pill-btn bg-white dark:bg-gray-900 border dark:border-gray-800 text-gray-700 dark:text-gray-300 text-xs font-bold px-4 py-2 rounded-xl hover:border-secondary transition-all" data-class="JEE">
+                <button onclick="filterHomePageClass('JEE')" class="course-pill-btn px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-300 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:border-blue-500 shadow-sm" data-class="JEE">
                     JEE
                 </button>
             </div>
         </div>
 
-        <!-- NEW: DYNAMIC SUBJECT FILTER SECTION -->
-        <!-- Shows only when subjects (e.g. Mathematics, English, Kannada, Physics) exist for the selected course -->
-        <div id="subject-filter-container" class="mb-8 hidden">
-            <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-200 dark:border-gray-800 pt-2" id="subject-buttons-list">
-                <!-- js/app.js will dynamically insert subject buttons here -->
+        <!-- Dynamic Subject Filter Container Bar -->
+        <div id="subject-filter-container" class="mb-8 hidden transition-all duration-300">
+            <div class="glass-card p-2 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 max-w-fit shadow-sm">
+                <div id="subject-buttons-list" class="flex flex-wrap items-center gap-2">
+                    <!-- js/app.js inserts subject pill buttons dynamically -->
+                </div>
             </div>
         </div>
 
-        <!-- Dynamic Resource Output Container -->
-        <div id="dynamic-resources-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <p class="text-gray-400 text-sm animate-pulse col-span-full text-center py-12">Contacting cloud document databases...</p>
+        <!-- Dynamic Resource Grid Output -->
+        <div id="dynamic-resources-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="col-span-full glass-card border border-slate-200/80 dark:border-slate-800 rounded-3xl p-12 text-center">
+                <i class="fa-solid fa-spinner fa-spin text-blue-500 text-3xl mb-3"></i>
+                <p class="text-slate-400 text-sm font-medium">Contacting cloud document repository...</p>
+            </div>
         </div>
     </main>
 
-    <!-- Overlay Authentication Guard Modal System -->
-    <div id="auth-modal" class="fixed inset-0 bg-black/70 backdrop-blur-md z-[100] hidden flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-gray-900 w-full max-w-md rounded-3xl p-6 shadow-2xl border dark:border-gray-800 transform scale-100 transition-all">
+    <!-- Overlay Authentication Guard Modal -->
+    <div id="auth-modal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-md z-[100] hidden flex items-center justify-center p-4 transition-all">
+        <div class="glass-card bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl p-8 shadow-2xl border border-slate-200 dark:border-slate-800 transform scale-100 transition-all relative">
             
             <!-- Modal Header -->
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-black text-gray-900 dark:text-white flex items-center gap-2">
-                    <i class="fa-solid fa-shield-halved text-secondary"></i> Student Access
+                <h3 class="text-xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2.5">
+                    <div class="h-8 w-8 bg-blue-50 dark:bg-blue-950 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center text-sm">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    Student Access
                 </h3>
-                <button onclick="closeAuthModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors">
-                    <i class="fa-solid fa-xmark text-xl"></i>
+                <button onclick="closeAuthModal()" class="h-8 w-8 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
 
             <!-- STEP 1: Google Auth Button -->
             <div id="google-signin-section" class="space-y-4">
-                <p class="text-sm text-gray-500 dark:text-gray-400">
-                    Sign in with your official Google account to access study materials.
+                <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                    Sign in with your official Google account to unlock full material access and downloading capabilities.
                 </p>
-                <button type="button" id="google-login-btn" class="w-full flex items-center justify-center gap-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-white font-bold py-3.5 rounded-xl transition-all shadow-sm">
+                <button type="button" id="google-login-btn" class="w-full flex items-center justify-center gap-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/80 text-slate-800 dark:text-white font-bold py-3.5 rounded-2xl transition-all shadow-sm hover:scale-[1.01]">
                     <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-5 h-5" alt="Google Logo">
                     Continue with Google
                 </button>
             </div>
 
-            <!-- STEP 2: Profile Details Form -->
+            <!-- STEP 2: Profile Registration Form -->
             <div id="profile-registration-section" class="space-y-4 hidden">
-                <p class="text-sm text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1.5">
+                <p class="text-xs text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950/40 p-3 rounded-xl border border-emerald-200/50 dark:border-emerald-800/50">
                     <i class="fa-solid fa-circle-check"></i> Google authenticated! Complete your student profile.
                 </p>
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">Full Student Name</label>
-                    <input type="text" id="profile-name" class="w-full px-4 py-2.5 border rounded-xl dark:bg-gray-800 dark:border-gray-700 outline-none focus:ring-2 focus:ring-secondary text-gray-900 dark:text-white bg-transparent" placeholder="Enter full legal name">
+                    <label class="block text-[10px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Full Student Name</label>
+                    <input type="text" id="profile-name" class="w-full px-4 py-3 border rounded-xl dark:bg-slate-800 dark:border-slate-700 outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-white text-xs bg-transparent" placeholder="Enter full legal name">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">Mobile Contact Number</label>
+                    <label class="block text-[10px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Mobile Contact Number</label>
                     <div class="flex">
-                        <span class="inline-flex items-center px-3.5 rounded-l-xl border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400">+91</span>
-                        <input type="tel" id="profile-phone" pattern="[6-9][0-9]{9}" maxlength="10" required class="w-full px-4 py-2.5 border rounded-r-xl dark:bg-gray-800 dark:border-gray-700 outline-none focus:ring-2 focus:ring-secondary text-gray-900 dark:text-white bg-transparent" placeholder="10-digit phone number">
+                        <span class="inline-flex items-center px-3.5 rounded-l-xl border border-r-0 border-slate-200 bg-slate-50 text-slate-500 text-xs dark:bg-slate-800 dark:border-slate-700 dark:text-slate-400 font-bold">+91</span>
+                        <input type="tel" id="profile-phone" pattern="[6-9][0-9]{9}" maxlength="10" required class="w-full px-4 py-3 border rounded-r-xl dark:bg-slate-800 dark:border-slate-700 outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-white text-xs bg-transparent" placeholder="10-digit phone number">
                     </div>
                 </div>
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">Academic Class / Course</label>
-                    <select id="profile-class" class="w-full px-4 py-2.5 border rounded-xl dark:bg-gray-800 dark:border-gray-700 outline-none focus:ring-2 focus:ring-secondary text-gray-900 dark:text-white bg-transparent">
-                        <option value="" class="dark:bg-gray-900">Select Class</option>
-                        <option value="SSLC" class="dark:bg-gray-900">SSLC</option>
-                        <option value="1st PUC" class="dark:bg-gray-900">1st PUC</option>
-                        <option value="2nd PUC" class="dark:bg-gray-900">2nd PUC</option>
-                        <option value="KCET" class="dark:bg-gray-900">KCET</option>
-                        <option value="NEET" class="dark:bg=gray=900">NEET</option>
-                        <option value="JEE" class="dark:bg=gray=900">JEE</option>
+                    <label class="block text-[10px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Academic Class / Course</label>
+                    <select id="profile-class" class="w-full px-4 py-3 border rounded-xl dark:bg-slate-800 dark:border-slate-700 outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-white text-xs bg-transparent">
+                        <option value="" class="dark:bg-slate-900">Select Class</option>
+                        <option value="SSLC" class="dark:bg-slate-900">SSLC</option>
+                        <option value="1st PUC" class="dark:bg-slate-900">1st PUC</option>
+                        <option value="2nd PUC" class="dark:bg-slate-900">2nd PUC</option>
+                        <option value="KCET" class="dark:bg-slate-900">KCET</option>
+                        <option value="NEET" class="dark:bg-slate-900">NEET</option>
+                        <option value="JEE" class="dark:bg-slate-900">JEE</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">Date of Birth</label>
-                    <input type="date" id="profile-dob" class="w-full px-4 py-2.5 border rounded-xl dark:bg-gray-800 dark:border-gray-700 outline-none focus:ring-2 focus:ring-secondary text-gray-900 dark:text-white bg-transparent">
+                    <label class="block text-[10px] font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Date of Birth</label>
+                    <input type="date" id="profile-dob" class="w-full px-4 py-3 border rounded-xl dark:bg-slate-800 dark:border-slate-700 outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 dark:text-white text-xs bg-transparent">
                 </div>
-                <button type="button" id="save-profile-btn" class="w-full bg-primary hover:bg-blue-800 text-white font-bold py-3.5 rounded-xl transition-all shadow-md active:scale-[0.98]">
+                <button type="button" id="save-profile-btn" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 rounded-2xl transition-all shadow-md shadow-blue-500/20 active:scale-[0.98] text-xs">
                     Complete Registration & Unlock Access
                 </button>
             </div>
@@ -189,7 +264,7 @@
     <!-- Active App Logic Script Binding -->
     <script type="module" src="js/app.js"></script>
     
-    <!-- Fallback Global Modal Display Functions -->
+    <!-- Modal Control Helpers -->
     <script>
         function openAuthModal() {
             const modal = document.getElementById('auth-modal');
