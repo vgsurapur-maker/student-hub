@@ -64,5 +64,5 @@ input:focus, select:focus, button:focus-visible {
 }
 
 .btn-glow:hover {
-    box-shadow: 0 0 25px rgba(199, 205, 214, 0.65);
+    box-shadow: 0 0 25px rgba(78, 146, 247, 0.65);
 }
