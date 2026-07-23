@@ -1,7 +1,18 @@
 // js/admin.js
 import { auth, db } from './firebase.js';
-import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-import { collection, addDoc, doc, deleteDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+import { 
+    signInWithEmailAndPassword, 
+    onAuthStateChanged, 
+    signOut 
+} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { 
+    collection, 
+    addDoc, 
+    doc, 
+    deleteDoc, 
+    serverTimestamp, 
+    onSnapshot 
+} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
 
 // DOM Node Element Declarations
 const loginCard = document.getElementById('admin-login-card');
@@ -15,6 +26,7 @@ const progressContainer = document.getElementById('upload-progress-container');
 const progressBar = document.getElementById('upload-progress-bar');
 const progressPercentage = document.getElementById('upload-percentage');
 const submitBtn = document.getElementById('submit-upload-btn');
+const adminList = document.getElementById('admin-materials-list');
 
 // Target Verification String Configuration
 const ADMIN_EMAIL_TARGET = "admin@studenthub.com"; 
@@ -66,7 +78,7 @@ if (fileInput) {
     });
 }
 
-// 4. Local Storage Bypass Pipeline
+// 4. Resource Upload & Database Publishing
 if (uploadForm) {
     uploadForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -98,17 +110,18 @@ if (uploadForm) {
                 clearedFileName = clearedFileName.replace('.pdf.pdf', '.pdf');
             }
             
-            // Points directly to your local PC materials directory
-            const localDistributionUrl = `/materials/${clearedFileName}`;
+            // Relative path for GitHub Pages & Local compatibility
+            const localDistributionUrl = `materials/${clearedFileName}`;
 
             if (progressBar) progressBar.style.width = '100%';
             if (progressPercentage) progressPercentage.textContent = '100%';
 
-            // Standardized Document Object Structure matching app.js requirements
+            // Document payload formatted for app.js filters
             const payload = {
-                academicClass: selectedClass,
-                class: selectedClass,
-                subject: subject,
+                course: selectedClass,        // Matched for course filter
+                academicClass: selectedClass, 
+                class: selectedClass,         
+                subject: subject,             // Matched for subject filter
                 title: title,
                 description: description || 'Official study notes uploaded for student review.',
                 fileUrl: localDistributionUrl, 
@@ -117,11 +130,11 @@ if (uploadForm) {
                 uploadedAt: serverTimestamp()
             };
 
-            // Saves to both "materials" AND "resources" to ensure 100% display rate
+            // Saves to both "materials" AND "resources" collections
             await addDoc(collection(db, "materials"), payload);
             await addDoc(collection(db, "resources"), payload);
 
-            alert("Study material successfully uploaded and published!");
+            alert(`Study material successfully uploaded and published under ${selectedClass} - ${subject}!`);
             uploadForm.reset();
             resetUploadFormControls();
         } catch (dbError) {
@@ -141,26 +154,7 @@ function resetUploadFormControls() {
     if (fileNameDisplay) fileNameDisplay.classList.add('hidden');
 }
 
-// 5. Global Delete Function (Call via window.deleteMaterial(docId))
-window.deleteMaterial = async function(docId) {
-    if (confirm("Are you sure you want to delete this study material from the database?")) {
-        try {
-            // Delete from both collections to keep database clean
-            await deleteDoc(doc(db, "materials", docId));
-            await deleteDoc(doc(db, "resources", docId));
-            alert("Material deleted successfully!");
-            window.location.reload();
-        } catch (error) {
-            console.error("Delete Error:", error);
-            alert(`Error deleting material: ${error.message}`);
-        }
-    }
-};
-import { onSnapshot } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
-
-// Fetch and display materials in admin panel for easy deletion
-const adminList = document.getElementById('admin-materials-list');
-
+// 5. Fetch and Display Uploaded Materials in Admin Panel
 if (adminList) {
     onSnapshot(collection(db, "materials"), (snapshot) => {
         adminList.innerHTML = '';
@@ -174,11 +168,11 @@ if (adminList) {
             const id = docSnap.id;
 
             const item = document.createElement('div');
-            item.className = 'flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200';
+            item.className = 'flex items-center justify-between p-3 bg-slate-50 dark:bg-gray-800/60 rounded-xl border border-slate-200 dark:border-gray-700';
             item.innerHTML = `
                 <div>
-                    <h4 class="font-bold text-slate-800 text-sm">${data.title || 'Untitled'}</h4>
-                    <p class="text-xs text-slate-500">${data.class || ''} • ${data.subject || ''}</p>
+                    <h4 class="font-bold text-slate-800 dark:text-gray-200 text-sm">${data.title || 'Untitled'}</h4>
+                    <p class="text-xs text-slate-500 dark:text-gray-400">${data.course || data.class || ''} • ${data.subject || ''}</p>
                 </div>
                 <button onclick="window.deleteMaterial('${id}')" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-xs font-bold transition">
                     Delete
@@ -188,3 +182,17 @@ if (adminList) {
         });
     });
 }
+
+// 6. Global Delete Function
+window.deleteMaterial = async function(docId) {
+    if (confirm("Are you sure you want to delete this study material from the database?")) {
+        try {
+            await deleteDoc(doc(db, "materials", docId));
+            await deleteDoc(doc(db, "resources", docId));
+            alert("Material deleted successfully!");
+        } catch (error) {
+            console.error("Delete Error:", error);
+            alert(`Error deleting material: ${error.message}`);
+        }
+    }
+};
