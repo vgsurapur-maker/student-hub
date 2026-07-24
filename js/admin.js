@@ -132,7 +132,7 @@ if (uploadForm) {
 
             // Saves to both "materials" AND "resources" collections
             await addDoc(collection(db, "materials"), payload);
-            await addDoc(collection(db, "resources"), payload);
+            await addDoc(collection(db, "materials"), payload);
 
             alert(`Study material successfully uploaded and published under ${selectedClass} - ${subject}!`);
             uploadForm.reset();
