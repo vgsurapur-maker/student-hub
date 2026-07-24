@@ -1,4 +1,3 @@
-// js/admin.js
 import { auth, db } from './firebase.js';
 import { 
     signInWithEmailAndPassword, 
@@ -95,7 +94,7 @@ if (uploadForm) {
             return;
         }
 
-        // Freeze interface elements
+        // Freeze interface elements to prevent duplicate clicks
         if (submitBtn) submitBtn.disabled = true;
         if (progressContainer) progressContainer.classList.remove('hidden');
 
@@ -104,13 +103,13 @@ if (uploadForm) {
         if (progressPercentage) progressPercentage.textContent = '50%';
 
         try {
-            // Standardize file name & fix duplicate extensions
+            // Standardize file name & replace spaces with underscores
             let clearedFileName = targetFile.name.replace(/\s+/g, '_');
             if (clearedFileName.endsWith('.pdf.pdf')) {
                 clearedFileName = clearedFileName.replace('.pdf.pdf', '.pdf');
             }
             
-            // Relative path for GitHub Pages & Local compatibility
+            // Relative path for GitHub Pages (No leading slash)
             const localDistributionUrl = `materials/${clearedFileName}`;
 
             if (progressBar) progressBar.style.width = '100%';
@@ -118,10 +117,10 @@ if (uploadForm) {
 
             // Document payload formatted for app.js filters
             const payload = {
-                course: selectedClass,        // Matched for course filter
+                course: selectedClass,        
                 academicClass: selectedClass, 
                 class: selectedClass,         
-                subject: subject,             // Matched for subject filter
+                subject: subject,             
                 title: title,
                 description: description || 'Official study notes uploaded for student review.',
                 fileUrl: localDistributionUrl, 
@@ -130,16 +129,15 @@ if (uploadForm) {
                 uploadedAt: serverTimestamp()
             };
 
-            // Saves to both "materials" AND "resources" collections
-            await addDoc(collection(db, "materials"), payload);
+            // ✅ Saved ONLY ONCE to "materials" collection
             await addDoc(collection(db, "materials"), payload);
 
             alert(`Study material successfully uploaded and published under ${selectedClass} - ${subject}!`);
             uploadForm.reset();
-            resetUploadFormControls();
         } catch (dbError) {
             console.error("Upload error:", dbError);
             alert(`Firestore Mapping Error: ${dbError.message}`);
+        } finally {
             resetUploadFormControls();
         }
     });
@@ -188,7 +186,6 @@ window.deleteMaterial = async function(docId) {
     if (confirm("Are you sure you want to delete this study material from the database?")) {
         try {
             await deleteDoc(doc(db, "materials", docId));
-            await deleteDoc(doc(db, "resources", docId));
             alert("Material deleted successfully!");
         } catch (error) {
             console.error("Delete Error:", error);
